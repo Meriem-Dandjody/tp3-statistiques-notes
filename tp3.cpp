@@ -94,6 +94,20 @@ int main()
         notes.push_back(lireNote(std::format("Note de l'étudiant {} : ", i)));
     }
 
-    // Affichage provisoire pour vérifier la saisie (on le remplacera)
-    std::println("\n{} : {} notes lues", ue, notes.size());
+        double minimum{noteMax};
+    double maximum{noteMin};
+    double somme{0.0};
+    int admis{0};
+    std::array<int, nbMentions> repartition{};
+
+    for (double n : notes) {
+        minimum = std::min(minimum, n);
+        maximum = std::max(maximum, n);
+        somme += n;
+        if (n >= seuilValidation) { ++admis; }
+        ++repartition[static_cast<std::size_t>(mentionPour(n))];
+    }
+
+    // Affichage provisoire (on le remplacera à l'étape 6)
+    std::println("\nmin = {}, max = {}, somme = {}, admis = {}", minimum, maximum, somme, admis);
 }
