@@ -1,4 +1,7 @@
 // TP 3 — Statistiques d'une série de notes
+#include <format>
+#include <print>
+#include <vector>
 #include <cstddef>
 #include <iostream>
 #include <sstream>
@@ -78,4 +81,19 @@ double lireNote(std::string_view invite)
         }
     }
 }
-int main() {}
+int main()
+{
+    std::cout << "Nom de l'UE : ";
+    std::string ue;
+    std::getline(std::cin, ue);
+
+    const int nb = lireEntier("Nombre d'étudiants (1 à 200) : ", 1, 200);
+
+    std::vector<double> notes;
+    for (int i{1}; i <= nb; ++i) {
+        notes.push_back(lireNote(std::format("Note de l'étudiant {} : ", i)));
+    }
+
+    // Affichage provisoire pour vérifier la saisie (on le remplacera)
+    std::println("\n{} : {} notes lues", ue, notes.size());
+}
