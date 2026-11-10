@@ -117,6 +117,19 @@ int main()
     }
     const double ecartType = std::sqrt(sommeEcarts / taille);
 
-    // Affichage provisoire (on le remplacera à l'étape 6)
-    std::println("\nmoyenne = {:.2f}, écart-type = {:.2f}", moyenne, ecartType);  
+        std::println("\nStatistiques — {} ({} étudiants)", ue, nb);
+    std::println("{:-<58}", "");
+    std::println("{:<18}: {:6.2f}", "Note minimale", minimum);
+    std::println("{:<18}: {:6.2f}", "Note maximale", maximum);
+    std::println("{:<18}: {:6.2f}", "Moyenne", moyenne);
+    std::println("{:<18}: {:6.2f}", "Écart-type", ecartType);
+    std::println("{:<18}: {:6} ({:.1f} %)", "Admis", admis, 100.0 * admis / taille);
+
+    std::println("\nRépartition par mention");
+    for (std::size_t i{0}; i < nbMentions; ++i) {
+        const auto m = static_cast<Mention>(i);
+        std::println("{:<12} {} ({})", libelle(m),
+                     std::string(static_cast<std::size_t>(repartition[i]), '*'),
+                     repartition[i]);
+    } 
 }
