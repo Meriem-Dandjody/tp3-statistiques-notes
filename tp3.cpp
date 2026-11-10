@@ -7,7 +7,7 @@
 #include <sstream>
 #include <string>
 #include <string_view>
-
+#include <cmath>
 
 constexpr std::size_t nbMentions = 5;
 constexpr double noteMin = 0.0;
@@ -108,6 +108,15 @@ int main()
         ++repartition[static_cast<std::size_t>(mentionPour(n))];
     }
 
+      const double taille = static_cast<double>(notes.size());
+    const double moyenne = somme / taille;
+
+    double sommeEcarts{0.0};
+    for (double n : notes) {
+        sommeEcarts += (n - moyenne) * (n - moyenne);
+    }
+    const double ecartType = std::sqrt(sommeEcarts / taille);
+
     // Affichage provisoire (on le remplacera à l'étape 6)
-    std::println("\nmin = {}, max = {}, somme = {}, admis = {}", minimum, maximum, somme, admis);
+    std::println("\nmoyenne = {:.2f}, écart-type = {:.2f}", moyenne, ecartType);  
 }
